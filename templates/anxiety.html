@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anxiety Questionnaire</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background: #222;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            margin-top: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+        }
+
+        .question {
+            margin-bottom: 15px;
+        }
+
+        .question label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #ddd;
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .option {
+            text-align: center;
+            margin: 0 10px;
+        }
+
+        .option input[type="radio"] {
+            display: none; /* Hide default radio button */
+        }
+
+        .option input[type="radio"] + label {
+            display: block;
+            width: 90px; /* Increased width */
+            height: 90px; /* Increased height */
+            border-radius: 50%;
+            border: 2px solid #ddd;
+            background-color: #444;
+            margin: 0 auto;
+            line-height: 70px; /* Adjusted for vertical centering */
+            text-align: center;
+            color: #ddd;
+            font-size: 12px; /* Adjusted font size */
+            cursor: pointer;
+        }
+
+        .option input[type="radio"]:checked + label {
+            border-color: #023E8A;
+            background-color: #023E8A;
+            color: #fff;
+        }
+
+        .option label span {
+            display: block;
+            font-size: 12px;
+            color: #ddd;
+            margin-top: 5px;
+        }
+
+        button {
+            background-color: #001D3F;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            align: center;
+        }
+        .form-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #023E8A;
+        }
+
+        .result, .doctors, .thankyou {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #444;
+            border-radius: 4px;
+        }
+
+        .result {
+            background: #333;
+        }
+
+        .doctors {
+            background: #222;
+        }
+
+        .thankyou {
+            background: #444;
+        }
+
+        .doctor-item {
+            margin-bottom: 15px;
+        }
+
+        .doctor-item a {
+            color: #1e90ff;
+            text-decoration: none;
+        }
+
+        .doctor-item a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Anxiety Questionnaire</h1>
+        <form id="questionnaire-form">
+            <div class="question">
+                <label for="q1">1. I find it very hard to unwind, relax or sit still</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q1a" name="q1" value="a" >
+                        <label for="q1a">Never</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q1b" name="q1" value="b">
+                        <label for="q1b">Almost Never</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q1c" name="q1" value="c">
+                        <label for="q1c">Sometimes</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q1d" name="q1" value="d">
+                        <label for="q1d">Fairly Often</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q1e" name="q1" value="e">
+                        <label for="q1e">Very Often</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q2">2. I have had stomach problems, such as feeling sick or stomach cramps</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q2a" name="q2" value="a" >
+                        <label for="q2a">Never</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q2b" name="q2" value="b">
+                        <label for="q2b">Almost Never</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q2c" name="q2" value="c">
+                        <label for="q2c">Sometimes</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q2d" name="q2" value="d">
+                        <label for="q2d">Fairly Often</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q2e" name="q2" value="e">
+                        <label for="q2e">Very Often</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q3">3. I have been irritable and easily become annoyed</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q3a" name="q3" value="a" >
+                        <label for="q3a">Never</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q3b" name="q3" value="b">
+                        <label for="q3b">Almost Never</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q3c" name="q3" value="c">
+                        <label for="q3c">Sometimes</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q3d" name="q3" value="d">
+                        <label for="q3d">Fairly Often</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q3e" name="q3" value="e">
+                        <label for="q3e">Very Often</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q4">4. I have experienced shortness of breath</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q4a" name="q4" value="a" >
+                        <label for="q4a">Never</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q4b" name="q4" value="b">
+                        <label for="q4b">Almost Never</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q4c" name="q4" value="c">
+                        <label for="q4c">Sometimes</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q4d" name="q4" value="d">
+                        <label for="q4d">Fairly Often</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q4e" name="q4" value="e">
+                        <label for="q4e">Very Often</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q5">5. I have felt dizzy and unsteady at times</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q5a" name="q5" value="a" >
+                        <label for="q5a">Never</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q5b" name="q5" value="b">
+                        <label for="q5b">Almost Never</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q5c" name="q5" value="c">
+                        <label for="q5c">Sometimes</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q5d" name="q5" value="d">
+                        <label for="q5d">Fairly Often</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q5e" name="q5" value="e">
+                        <label for="q5e">Very Often</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q6">6. I have had difficulties with sleep (including waking early, finding it hard to go to sleep)</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q6a" name="q6" value="a" >
+                        <label for="q6a">Never</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q6b" name="q6" value="b">
+                        <label for="q6b">Almost Never</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q6c" name="q6" value="c">
+                        <label for="q6c">Sometimes</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q6d" name="q6" value="d">
+                        <label for="q6d">Fairly Often</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q6e" name="q6" value="e">
+                        <label for="q6e">Very Often</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q7">7. I have felt panicked and overwhelmed by things in my life</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q7a" name="q7" value="a" >
+                        <label for="q7a">Never</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q7b" name="q7" value="b">
+                        <label for="q7b">Almost Never</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q7c" name="q7" value="c">
+                        <label for="q7c">Sometimes</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q7d" name="q7" value="d">
+                        <label for="q7d">Fairly Often</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q7e" name="q7" value="e">
+                        <label for="q7e">Very Often</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q8">8. I have felt nervous and on edge</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q8a" name="q8" value="a" >
+                        <label for="q8a">Never</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q8b" name="q8" value="b">
+                        <label for="q8b">Almost Never</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q8c" name="q8" value="c">
+                        <label for="q8c">Sometimes</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q8d" name="q8" value="d">
+                        <label for="q8d">Fairly Often</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q8e" name="q8" value="e">
+                        <label for="q8e">Very Often</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q9">9. I have had trembling hands</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q9a" name="q9" value="a" >
+                        <label for="q9a">Never</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q9b" name="q9" value="b">
+                        <label for="q9b">Almost Never</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q9c" name="q9" value="c">
+                        <label for="q9c">Sometimes</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q9d" name="q9" value="d">
+                        <label for="q9d">Fairly Often</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q9e" name="q9" value="e">
+                        <label for="q9e">Very Often</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q10">10. I seem to be constantly worrying about things</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q10a" name="q10" value="a" >
+                        <label for="q10a">Never</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q10b" name="q10" value="b">
+                        <label for="q10b">Almost Never</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q10c" name="q10" value="c">
+                        <label for="q10c">Sometimes</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q10d" name="q10" value="d">
+                        <label for="q10d">Fairly Often</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q10e" name="q10" value="e">
+                        <label for="q10e">Very Often</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group"><button type="submit">Submit</button></div>
+        </form>
+        <div id="result" class="result"></div>
+        <div id="doctors" class="doctors" style="display: none;">
+            <h2>Recommended Doctors</h2>
+            <div class="doctor-item">
+                <p><strong>Dr. Ahmed Reshamvala</strong></p>
+                <p>Phone: 912071171501</p>
+                <p><a href="https://maps.app.goo.gl/ZYqTPhM9eyso9g2d7" target="_blank">Location</a></p>
+                <p>Experience: 1+ years</p>
+            </div>
+            <div class="doctor-item">
+                <p><strong>Dr. Dhruva Ithal</strong></p>
+                <p>Phone: 912071171501</p>
+                <p><a href="https://maps.app.goo.gl/eKrNHPcJfe3LK1pc6" target="_blank">Location</a></p>
+                <p>Experience: 11+ years</p>
+            </div>
+            <div class="doctor-item">
+                <p><strong>Dr. Anand Jayaraman</strong></p>
+                <p>Phone: 918071966822</p>
+                <p><a href="https://g.co/kgs/CmsYz8R" target="_blank">Location</a></p>
+                <p>Experience: 27 years</p>
+            </div>
+            <div class="doctor-item">
+                <p><strong>Dr. Harsha GT</strong></p>
+                <p>Phone: 919513610115</p>
+                <p><a href="https://maps.app.goo.gl/UZcvr8Adb9hyU6HT6" target="_blank">Location</a></p>
+                <p>Experience: 4 years</p>
+            </div>
+        </div>
+        <div id="thankyou" class="thankyou" style="display: none;">
+            <h2>Thank You!</h2>
+            <p>Your responses have been recorded.</p>
+        </div>
+    </div>
+
+    <script>
+        const scoring = {
+            'a': 0,
+            'b': 1,
+            'c': 2,
+            'd': 3,
+            'e': 4
+        };
+        
+        const anxietyLevels = [
+            { level: "Low to Mild Anxiety", min: 0, max: 4 },
+            { level: "Mild Anxiety", min: 5, max: 9 },
+            { level: "Moderate Anxiety", min: 10, max: 14 },
+            { level: "Severe Anxiety", min: 15, max: 19 },
+            { level: "Extremely Severe Anxiety", min: 20, max: 40 }
+        ];
+        
+        function validateForm() {
+            const questions = document.querySelectorAll('.question');
+            for (let i = 0; i < questions.length; i++) {
+                const inputs = questions[i].querySelectorAll('input[type="radio"]');
+                const answered = Array.from(inputs).some(input => input.checked);
+                if (i > 0 && !answered) {
+                    alert(`Please answer question ${i + 1}`);
+                    return false;
+                }
+            }
+            return true;
+        }
+        
+        document.getElementById('questionnaire-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+        
+            if (!validateForm()) return;
+        
+            const formElements = this.elements;
+            let totalScore = 0;
+        
+            // Calculate the total score
+            for (let i = 1; i <= 10; i++) { // Assuming 10 questions
+                const answer = formElements[`q${i}`]?.value;
+                if (answer) {
+                    totalScore += scoring[answer];
+                }
+            }
+        
+            // Determine anxiety level
+            let anxietyLevel = "Unknown";
+            let showDoctors = false;
+        
+            for (const level of anxietyLevels) {
+                if (totalScore >= level.min && totalScore <= level.max) {
+                    anxietyLevel = level.level;
+                    if (totalScore >= 15) { // Adjust threshold for showing doctors if needed
+                        showDoctors = true;
+                    }
+                    break;
+                }
+            }
+        
+            // Display result
+            document.getElementById('result').innerHTML = `
+                <h2>Your Anxiety Level</h2>
+                <p><strong>Total Score:</strong> ${totalScore}</p>
+                <p><strong>Anxiety Level:</strong> ${anxietyLevel}</p>
+            `;
+        
+            // Show doctors or thank you message based on the score
+            if (showDoctors) {
+                document.getElementById('doctors').style.display = 'block';
+                document.getElementById('thankyou').style.display = 'none';
+            } else {
+                document.getElementById('doctors').style.display = 'none';
+                document.getElementById('thankyou').style.display = 'block';
+            }
+        });
+        
+    </script>
+</body>
+</html>

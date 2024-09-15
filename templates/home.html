@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - BHAVANA Bot</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Video Background -->
+    <div class="video-background-container">
+        <video autoplay muted loop>
+            <source src="{{ url_for('static', filename='images/Dark Background Web.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Gradient Overlay -->
+    <div class="gradient-overlay"></div>
+
+    <!-- Navbar -->
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="BHAVANA Bot" class="logo">
+        </div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li>
+                    <a href="/about">About</a>
+                    <ul>
+                        <li><a href="#mission">Our Mission</a></li>
+                        <li><a href="#team">Our Team</a></li>
+                    </ul>
+                </li>
+                <li><a href="/bhavana">Try Bhavana</a></li>
+                <li><a href="/self_assessment">Self Assessment</a></li>
+                <li><a href="/feedback">Articles/Feedback</a></li>
+                {% if 'username' in session %}
+                    <li><a class="login-button" href="/logout">Logout</a></li>
+                {% else %}
+                    <li><a class="login-button" href="/login_signup">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>   
+    </header>
+
+<!-- Main Content -->
+<div class="content">
+    <div class="info-card">
+        <div class="image-content">
+            <img src="{{ url_for('static', filename='images/botgif.gif') }}" alt="BHAVANA Bot GIF" class="moving-gif">
+        </div>
+        <div class="text-content">
+            <h1>Welcome to BHAVANA</h1>
+            <p>Your companion for emotional well-being and support.</p>
+            <a href="/about" class="cta-button">Learn More</a>
+            <p>
+                BHAVANA Bot is designed to be more than just a chatbot; it's your personal emotional support system. With advanced capabilities to understand and respond to your feelings, it provides real-time assistance tailored to your emotional state. Whether you're seeking comfort or guidance, BHAVANA Bot is here to support you through every step of your emotional journey.
+            </p>
+            <p>
+                Our bot adapts to your needs, learning from each interaction to offer a more personalized experience. It's not just about technology; it's about building a relationship with someone who understands and cares. BHAVANA Bot is your ally in navigating life's emotional challenges, helping you find clarity and comfort whenever you need it.
+            </p>
+            <p>
+                As you interact with BHAVANA Bot, you'll experience a supportive presence that evolves with you. It's designed to provide a sense of companionship and understanding, ensuring that you never feel alone. Discover how BHAVANA Bot can make a difference in your life today.
+            </p>
+            <p>
+                Explore the features of BHAVANA Bot and see how it can enhance your emotional well-being. Take the first step towards a more supportive and empathetic experience with our chatbot.
+            </p>
+            <h2>Why Choose BHAVANA Bot?</h2>
+            <p>
+                BHAVANA Bot stands out with its unique approach to emotional support. Unlike generic bots, BHAVANA is tailored to recognize subtle emotional cues and respond with empathy and understanding. This personalized interaction ensures that you receive the most relevant support based on your current emotional state.
+            </p>
+            <p>
+                Our team of experts continuously updates BHAVANA Bot to ensure it incorporates the latest research in emotional intelligence. This ongoing improvement means that BHAVANA is not only a tool but a partner in your emotional growth and well-being.
+            </p>
+            <h2>How BHAVANA Bot Works</h2>
+            <p>
+                BHAVANA Bot uses advanced algorithms to analyze your inputs and detect emotional patterns. Through natural language processing and machine learning, it provides responses that are not only relevant but also supportive. You can interact with BHAVANA via text or voice, making it accessible and easy to use in various scenarios.
+            </p>
+            <p>
+                Whether you’re at home, at work, or on the go, BHAVANA Bot is designed to be available whenever you need it. Its flexibility and adaptability make it a valuable resource for managing stress, seeking advice, or simply having a conversation.
+            </p>
+            <h2>Join Our Community</h2>
+            <p>
+                By choosing BHAVANA Bot, you’re joining a community committed to emotional well-being. We offer resources, tips, and support to help you make the most of your experience. Connect with others who are also exploring emotional growth and share your journey with us.
+            </p>
+            <p>
+                Stay connected through our social media channels and be the first to know about new updates and features. Your feedback is crucial to us, and we’re here to listen and improve continually.
+            </p>
+        </div>
+    </div>
+</div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 BHAVANA Bot. All rights reserved.</p>
+            <p>Contact us at <a href="mailto:support@bhavanabot.com">support@bhavanabot.com</a></p>
+        </div>
+    </footer>
+
+    <style>
+        /* Basic Reset */
+        body, h1, p {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.8;
+        }
+    
+        /* Video Background */
+        .video-background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+    
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    
+        /* Gradient Overlay */
+        .gradient-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.185), rgba(0, 0, 0, 0.9));
+            z-index: -1;
+        }
+    
+        /* Navbar */
+        /* Navbar Button Styling */
+    .login-button {
+        display: inline-block;
+        background-color: #4c63af; /* Green background */
+        color: #fff; /* White text */
+        padding: 10px 20px; /* Padding for button */
+        border-radius: 5px; /* Rounded corners */
+        text-decoration: none; /* Remove underline */
+        font-size: 16px; /* Font size */
+        font-weight: bold; /* Bold text */
+        box-shadow: 0 4px 8px rgba(0, 17, 255, 0.5); /* Green shadow */
+        transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+    }
+    
+    .login-button:hover {
+        background-color: #4546a0; /* Darker green on hover */
+        box-shadow: 0 6px 12px rgba(0, 255, 0, 0.7); /* Darker green shadow on hover */
+    }
+    header {
+    position: fixed; /* Fixed position for the navbar */
+    top: 0;
+    width: 100%; /* Full width */
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px; /* Adjust padding for consistent spacing */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s ease-in-out;
+}
+
+header.scrolled {
+    background: rgba(0, 0, 0, 0.9);
+}
+        .logo {
+            height: 150px; /* Adjust height as needed */
+            width: auto; /* Maintain aspect ratio */
+        }
+    
+        .navbar {
+            display: flex;
+            align-items: center;
+        }
+    
+        .navbar ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+    
+        .navbar ul li {
+            margin: 0 15px; /* Uniform margin between items */
+            position: relative; /* Needed for dropdown positioning */
+        }
+    
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px; /* Consistent padding */
+            font-size: 18px; /* Consistent font size */
+            display: block;
+            transition: background-color 0.3s ease, border-radius 0.3s ease;
+        }
+    
+        .navbar a:hover {
+            background-color: #555;
+            border-radius: 5px;
+        }
+    
+        /* Dropdown Menu */
+        .navbar li ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 10px 0;
+            border-radius: 5px;
+            z-index: 1000;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: translateY(-10px);
+            opacity: 0;
+            visibility: hidden;
+        }
+    
+        .navbar li:hover ul {
+            display: block;
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+    
+        .navbar li ul li {
+            width: 200px; /* Ensure consistency for dropdown items */
+        }
+    
+        .navbar li ul a {
+            display: block;
+            padding: 10px;
+            white-space: nowrap;
+            color: #fff; /* Ensure text color is consistent */
+            text-decoration: none; /* Ensure text decoration is consistent */
+        }
+    
+        .navbar li ul a:hover {
+            background-color: #666; /* Consistent hover effect */
+        }
+    
+        /* Main Content */
+        .content {
+            padding: 100px 40px;
+            max-width: 1800px;
+            margin: 10 auto;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        .info-card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(38, 33, 109, 0.7), 
+                        0 8px 16px rgba(76, 173, 252, 0.2) inset;
+            display: flex;
+            padding: 50px;
+            margin: 20px auto;
+            width: 100%;
+            max-width: 2000px;
+            text-align: left;
+        }
+    
+        .image-content {
+            width: 40%; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            border-radius: 15px;
+            padding: 30px;
+        }
+    
+        .moving-gif {
+            width: 100%;
+            height: auto;
+            animation: moveGif 2s ease-in-out infinite, 
+                        upDown 3s ease-in-out infinite, 
+                        rotateGif 3s linear infinite;
+        }
+    
+        @keyframes moveGif {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(10px);
+            }
+        }
+    
+        @keyframes upDown {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+    
+        @keyframes rotateGif {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            50% {
+                transform: rotate(5deg);
+            }
+        }
+    
+        .text-content {
+            padding-left: 40px;
+            width: 60%;
+        }
+    
+        .text-content h1 {
+            font-size: 50px;
+            margin-bottom: 30px;
+            background: linear-gradient(90deg, #34d5ff, #ff7a7a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+            animation: textGlow 1.5s ease-in-out infinite alternate;
+        }
+    
+        @keyframes textGlow {
+            from {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+            }
+            to {
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            }
+        }
+    
+        .text-content p {
+            margin-bottom: 20px;
+            font-size: 20px;
+            line-height: 1.8;
+        }
+    
+        .cta-button {
+            display: inline-block;
+            background-color: #007BFF;
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+    
+        .cta-button:hover {
+            background-color: #0056b3;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+    
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #333;
+            color: #fff;
+            margin-top: 60px;
+        }
+    
+        footer p {
+            margin: 5px 0;
+        }
+    
+        footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+    
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    
+        <script>
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                header.classList.toggle('scrolled', window.scrollY > 50);
+            });
+        </script>
+    
+    </body>
+    </html>
+    

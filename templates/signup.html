@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <style>
+        /* Basic Reset */
+body, h1, p {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f4;
+    color: #faf6f6;
+    line-height: 1.8;
+}
+
+/* Video Background */
+.video-background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Gradient Overlay */
+.gradient-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9));
+    z-index: -1;
+}
+
+/* Navbar */
+.login-button {
+    display: inline-block;
+    background-color: #4c63af; /* Button background */
+    color: #fff; /* Button text color */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 17, 255, 0.5); /* Shadow */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #5762fc; /* Darker on hover */
+    box-shadow: 0 6px 12px rgba(98, 0, 255, 0.7);
+}
+
+.logo {
+    height: 150px;
+    width: auto;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+}
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar ul li {
+    margin: 0 15px;
+    position: relative;
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 15px;
+    font-size: 18px;
+    transition: background-color 0.3s ease, border-radius 0.3s ease;
+}
+
+.navbar a:hover {
+    background-color: #555;
+    border-radius: 5px;
+}
+
+/* Dropdown Menu */
+.navbar li ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 10px 0;
+    border-radius: 5px;
+    z-index: 1000;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(-10px);
+    opacity: 0;
+    visibility: hidden;
+}
+
+.navbar li:hover ul {
+    display: block;
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.navbar li ul li {
+    width: 200px;
+}
+
+.navbar li ul a {
+    display: block;
+    padding: 10px;
+    color: #fff;
+}
+
+.navbar li ul a:hover {
+    background-color: #666;
+}
+
+/* Container */
+.container {
+    width: 350px;
+    margin: 150px auto 50px auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.151); /* Semi-transparent white */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    text-align: center;
+    color: #f5f0f0;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+/* Form */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Spacing between form elements */
+}
+
+label {
+    color: #fff9f9;
+    font-weight: bold;
+}
+
+input {
+    padding: 12px;
+    border: 1px solid #fcf7f7;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #faf3f3ef;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: #eaecf1;
+    outline: none;
+}
+
+button {
+    padding: 12px;
+    border: none;
+    background-color: #4c63af;
+    color: rgb(255, 255, 255);
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #383e8a;
+    transform: translateY(-2px);
+}
+
+.error {
+    color: red;
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+header {
+    position: fixed; /* Fixed position for the navbar */
+    top: 0;
+    width: 100%; /* Full width */
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px; /* Adjust padding for consistent spacing */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s ease-in-out;
+}
+
+header.scrolled {
+    background: rgba(0, 0, 0, 0.9);
+}
+ /* Navbar */
+        /* Navbar Button Styling */
+        .login-button {
+        display: inline-block;
+        background-color: #4c63af; /* Green background */
+        color: #fff; /* White text */
+        padding: 10px 20px; /* Padding for button */
+        border-radius: 5px; /* Rounded corners */
+        text-decoration: none; /* Remove underline */
+        font-size: 16px; /* Font size */
+        font-weight: bold; /* Bold text */
+        box-shadow: 0 4px 8px rgba(0, 17, 255, 0.5); /* Green shadow */
+        transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+    }
+    
+    .login-button:hover {
+        background-color: #4546a0; /* Darker green on hover */
+        box-shadow: 0 6px 12px rgba(0, 255, 0, 0.7); /* Darker green shadow on hover */
+    }
+    
+        .logo {
+            height: 150px; /* Adjust height as needed */
+            width: auto; /* Maintain aspect ratio */
+        }
+    
+        .navbar {
+            display: flex;
+            align-items: center;
+        }
+    
+        .navbar ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+    
+        .navbar ul li {
+            margin: 0 15px; /* Uniform margin between items */
+            position: relative; /* Needed for dropdown positioning */
+        }
+    
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px; /* Consistent padding */
+            font-size: 18px; /* Consistent font size */
+            display: block;
+            transition: background-color 0.3s ease, border-radius 0.3s ease;
+        }
+    
+        .navbar a:hover {
+            background-color: #555;
+            border-radius: 5px;
+        }
+    
+        /* Dropdown Menu */
+        .navbar li ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 10px 0;
+            border-radius: 5px;
+            z-index: 1000;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: translateY(-10px);
+            opacity: 0;
+            visibility: hidden;
+        }
+    
+        .navbar li:hover ul {
+            display: block;
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+    
+        .navbar li ul li {
+            width: 200px; /* Ensure consistency for dropdown items */
+        }
+    
+        .navbar li ul a {
+            display: block;
+            padding: 10px;
+            white-space: nowrap;
+            color: #fff; /* Ensure text color is consistent */
+            text-decoration: none; /* Ensure text decoration is consistent */
+        }
+    
+        .navbar li ul a:hover {
+            background-color: #666; /* Consistent hover effect */
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Background -->
+    <div class="video-background-container">
+        <video autoplay muted loop>
+            <source src="{{ url_for('static', filename='images/Dark Background Web.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Gradient Overlay -->
+    <div class="gradient-overlay"></div>
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="BHAVANA Bot" class="logo">
+        </div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li>
+                    <a href="/about">About</a>
+                    <ul>
+                        <li><a href="#mission">Our Mission</a></li>
+                        <li><a href="#team">Our Team</a></li>
+                    </ul>
+                </li>
+                <li><a href="/bhavana">Try Bhavana</a></li>
+                <li><a href="/self_assessment">Self Assessment</a></li>
+                <li><a href="/feedback">Articles/Feedback</a></li>
+                {% if 'username' in session %}
+                    <li><a class="login-button" href="/logout">Logout</a></li>
+                {% else %}
+                    <li><a class="login-button" href="/login_signup">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>   
+    </header>
+
+    <div class="container">
+        <h2>Signup</h2>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        <form id="signupForm" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Signup</button>
+            <p>Already have an account? <a href="{{ url_for('login') }}" style="color: white;">Login</a></p>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const signupForm = document.getElementById('signupForm');
+            
+            signupForm.addEventListener('submit', (event) => {
+                event.preventDefault(); // Prevent form submission
+                
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+
+                // Basic validation
+                if (username === '' || password === '') {
+                    alert('Please fill in all fields');
+                    return;
+                }
+
+                signupForm.submit(); // Proceed with form submission
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,410 @@
+/* Global Styles */
+  /* Navbar */
+  header {
+    position: fixed; /* Fixed position for the navbar */
+    top: 0;
+    width: 100%; /* Full width */
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px; /* Adjust padding for consistent spacing */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s ease-in-out;
+}
+
+header.scrolled {
+    background: rgba(0, 0, 0, 0.9);
+}
+        /* Navbar Button Styling */
+        .login-button {
+          display: inline-block;
+          background-color: #4c63af; /* Green background */
+          color: #fff; /* White text */
+          padding: 10px 20px; /* Padding for button */
+          border-radius: 5px; /* Rounded corners */
+          text-decoration: none; /* Remove underline */
+          font-size: 16px; /* Font size */
+          font-weight: bold; /* Bold text */
+          box-shadow: 0 4px 8px rgba(0, 17, 255, 0.5); /* Green shadow */
+          transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+      }
+      
+      .login-button:hover {
+          background-color: #4546a0; /* Darker green on hover */
+          box-shadow: 0 6px 12px rgba(98, 0, 255, 0.7); /* Darker green shadow on hover */
+      }
+      
+          .logo {
+              height: 150px; /* Adjust height as needed */
+              width: auto; /* Maintain aspect ratio */
+          }
+      
+          .navbar {
+              display: flex;
+              align-items: center;
+          }
+      
+          .navbar ul {
+              display: flex;
+              list-style: none;
+              padding: 0;
+              margin: 0;
+          }
+      
+          .navbar ul li {
+              margin: 0 15px; /* Uniform margin between items */
+              position: relative; /* Needed for dropdown positioning */
+          }
+      
+          .navbar a {
+              color: #fff;
+              text-decoration: none;
+              font-weight: bold;
+              padding: 10px 15px; /* Consistent padding */
+              font-size: 18px; /* Consistent font size */
+              display: block;
+              transition: background-color 0.3s ease, border-radius 0.3s ease;
+          }
+      
+          .navbar a:hover {
+              background-color: #555;
+              border-radius: 5px;
+              will-change: transform, box-shadow;
+          }
+      
+          /* Dropdown Menu */
+          .navbar li ul {
+              display: none;
+              position: absolute;
+              top: 100%;
+              left: 0;
+              background: rgba(0, 0, 0, 0.9);
+              padding: 10px 0;
+              border-radius: 5px;
+              z-index: 1000;
+              transition: opacity 0.3s ease, transform 0.3s ease;
+              transform: translateY(-10px);
+              opacity: 0;
+              visibility: hidden;
+          }
+      
+          .navbar li:hover ul {
+              display: block;
+              transform: translateY(0);
+              opacity: 1;
+              visibility: visible;
+          }
+      
+          .navbar li ul li {
+              width: 200px; /* Ensure consistency for dropdown items */
+          }
+      
+          .navbar li ul a {
+              display: block;
+              padding: 10px;
+              white-space: nowrap;
+              color: #fff; /* Ensure text color is consistent */
+              text-decoration: none; /* Ensure text decoration is consistent */
+          }
+      
+          .navbar li ul a:hover {
+              background-color: #666; /* Consistent hover effect */
+          }
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+/* Background Video */
+#background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+  filter: brightness(60%);
+}
+
+/* Navbar Styles */
+header {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 50px;
+  width: auto;
+  margin-right: 20px;
+}
+
+.navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.navbar ul li {
+  position: relative;
+  margin-right: 20px;
+}
+
+.navbar ul li a {
+  text-decoration: none;
+  color: #fff;
+  padding: 8px 12px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar ul li a:hover {
+  background-color: #555;
+  border-radius: 5px;
+}
+
+.navbar ul li ul {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  border-radius: 5px;
+  display: none;
+  padding: 10px;
+}
+
+.navbar ul li:hover ul {
+  display: block;
+}
+
+.navbar ul li ul li {
+  margin-right: 0;
+  width: 200px;
+}
+
+.navbar ul li ul li a {
+  display: block;
+  padding: 10px;
+  color: #fff;
+}
+
+/* Container Styles */
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin: 100px auto 20px auto; /* Adjusted for navbar height */
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+/* Sidebar Styles */
+.slidebar {
+  position: fixed;
+  left: 0;
+  top: 100px; /* Adjusted for navbar height */
+  width: 300px;
+  height: calc(100% - 100px);
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+.slidebar.active {
+  transform: translateX(0);
+}
+
+#toggle-sidebar {
+  position: absolute;
+  top: 20px;
+  right: -60px;
+  width: 50px;
+  height: 50px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+#history-sidebar {
+  overflow-y: auto;
+  height: calc(100% - 50px);
+  padding: 10px;
+}
+
+.chat-item {
+  background-color: #444;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.chat-item:hover {
+  background-color: #555;
+}
+
+/* Webcam Feed Styles */
+.webcam-feed {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+#webcam {
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* Chat Box Styles */
+.chat-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  max-width: 600px;
+}
+
+#chat-response {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.bhavana-message,
+.user-message {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.bhavana-message p,
+.user-message p {
+  background-color: #e1f7d5;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 0;
+  max-width: 80%;
+}
+
+.user-message p {
+  background-color: #c2f0fc;
+  margin-left: auto;
+}
+
+.bhavana-logo {
+  width: 80px;
+  height: 80px;
+  margin-right: 10px;
+}
+
+#chat-form {
+  display: flex;
+  align-items: center;
+}
+
+#user_input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+}
+
+#chat-form button {
+  padding: 15px 25px;
+  background-color:  #001D3F;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  width:150px; 
+}
+
+#capture-button,
+#new-chat-button {
+  padding: 15px 25px;
+  background-color:  #001D3F;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  margin: 5px;
+  cursor: pointer;
+  width:150px;
+  font-size: medium;
+}
+
+#capture-button:disabled {
+  background-color: #023E8A;
+}
+
+#chat-response {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.user-message,
+.bhavana-message {
+  display: flex;
+  align-items: flex-start;
+}
+
+.user-message p,
+.bhavana-message p {
+  margin: 0;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 80%;
+}
+
+.bhavana-message p {
+  background-color: #e1f7d5;
+}
+
+.user-message p {
+  background-color: #c2f0fc;
+}
+
+.bhavana-logo {
+  width: 80px;
+  height: 80px;
+  margin-right: 10px;
+}

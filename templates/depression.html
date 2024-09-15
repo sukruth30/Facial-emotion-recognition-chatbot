@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depression Questionnaire</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background: #222;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            margin-top: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+        }
+
+        .question {
+            margin-bottom: 15px;
+        }
+
+        .question label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #ddd;
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .option {
+            text-align: center;
+            margin: 0 10px;
+        }
+
+        .option input[type="radio"] {
+            display: none; /* Hide default radio button */
+        }
+
+        .option input[type="radio"] + label {
+            display: block;
+            width: 90px; /* Increased width */
+            height: 90px; /* Increased height */
+            border-radius: 50%;
+            border: 2px solid #ddd;
+            background-color: #444;
+            margin: 0 auto;
+            line-height: 70px; /* Adjusted for vertical centering */
+            text-align: center;
+            color: #ddd;
+            font-size: 12pxpx; /* Adjusted font size */
+            cursor: pointer;
+        }
+
+        .option input[type="radio"]:checked + label {
+            border-color: #023E8A;
+            background-color: #023E8A;
+            color: #fff;
+        }
+
+        .option label span {
+            display: block;
+            font-size: 12px;
+            color: #ddd;
+            margin-top: 5px;
+        }
+
+        button {
+            background-color: #001D3F;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            align: center;
+        }
+        .form-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #023E8A;
+        }
+
+        .result, .doctors, .thankyou {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #444;
+            border-radius: 4px;
+        }
+
+        .result {
+            background: #333;
+        }
+
+        .doctors {
+            background: #222;
+        }
+
+        .thankyou {
+            background: #444;
+        }
+
+        .doctor-item {
+            margin-bottom: 15px;
+        }
+
+        .doctor-item a {
+            color: #1e90ff;
+            text-decoration: none;
+        }
+
+        .doctor-item a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Depression Questionnaire</h1>
+        <form id="questionnaire-form">
+            <div class="question">
+                <label for="q1">1. I feel overwhelmingly sad at times</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q1a" name="q1" value="a" >
+                        <label for="q1a">Definitely agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q1b" name="q1" value="b">
+                        <label for="q1b">Slightly agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q1c" name="q1" value="c">
+                        <label for="q1c">Slightly disagree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q1d" name="q1" value="d">
+                        <label for="q1d">Definitely disagree</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q2">2. When I think of the future I feel hopeless</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q2a" name="q2" value="a" >
+                        <label for="q2a">Definitely agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q2b" name="q2" value="b">
+                        <label for="q2b">Slightly agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q2c" name="q2" value="c">
+                        <label for="q2c">Slightly disagree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q2d" name="q2" value="d">
+                        <label for="q2d">Definitely disagree</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q3">3. I feel like a complete failure</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q3a" name="q3" value="a" >
+                        <label for="q3a">Definitely agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q3b" name="q3" value="b">
+                        <label for="q3b">Slightly agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q3c" name="q3" value="c">
+                        <label for="q3c">Slightly disagree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q3d" name="q3" value="d">
+                        <label for="q3d">Definitely disagree</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q4">4. I get a lot of satisfaction/joy from doing things</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q4a" name="q4" value="a" >
+                        <label for="q4a">Definitely agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q4b" name="q4" value="b">
+                        <label for="q4b">Slightly agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q4c" name="q4" value="c">
+                        <label for="q4c">Slightly disagree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q4d" name="q4" value="d">
+                        <label for="q4d">Definitely disagree</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q5">5. I feel guilty about something most of the time</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q5a" name="q5" value="a" >
+                        <label for="q5a">Definitely agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q5b" name="q5" value="b">
+                        <label for="q5b">Slightly agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q5c" name="q5" value="c">
+                        <label for="q5c">Slightly disagree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q5d" name="q5" value="d">
+                        <label for="q5d">Definitely disagree</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q6">6. I feel like I am being punished</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q6a" name="q6" value="a" >
+                        <label for="q6a">Definitely agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q6b" name="q6" value="b">
+                        <label for="q6b">Slightly agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q6c" name="q6" value="c">
+                        <label for="q6c">Slightly disagree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q6d" name="q6" value="d">
+                        <label for="q6d">Definitely disagree</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q7">7. I feel disappointed (even disgusted) with myself</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q7a" name="q7" value="a" >
+                        <label for="q7a">Definitely agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q7b" name="q7" value="b">
+                        <label for="q7b">Slightly agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q7c" name="q7" value="c">
+                        <label for="q7c">Slightly disagree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q7d" name="q7" value="d">
+                        <label for="q7d">Definitely disagree</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q8">8. The bad things in my life aren’t all my fault</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q8a" name="q8" value="a" >
+                        <label for="q8a">Definitely agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q8b" name="q8" value="b">
+                        <label for="q8b">Slightly agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q8c" name="q8" value="c">
+                        <label for="q8c">Slightly disagree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q8d" name="q8" value="d">
+                        <label for="q8d">Definitely disagree</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q9">9. I am often on the brink of tears or cry</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q9a" name="q9" value="a" >
+                        <label for="q9a">Definitely agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q9b" name="q9" value="b">
+                        <label for="q9b">Slightly agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q9c" name="q9" value="c">
+                        <label for="q9c">Slightly disagree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q9d" name="q9" value="d">
+                        <label for="q9d">Definitely disagree</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q10">10. I feel irritated and annoyed by things in my life</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q10a" name="q10" value="a" >
+                        <label for="q10a">Definitely agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q10b" name="q10" value="b">
+                        <label for="q10b">Slightly agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q10c" name="q10" value="c">
+                        <label for="q10c">Slightly disagree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q10d" name="q10" value="d">
+                        <label for="q10d">Definitely disagree</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q11">11. I am very interested in other people’s lives and like to listen to them</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q11a" name="q11" value="a" >
+                        <label for="q11a">Definitely agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q11b" name="q11" value="b">
+                        <label for="q11b">Slightly agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q11c" name="q11" value="c">
+                        <label for="q11c">Slightly disagree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q11d" name="q11" value="d">
+                        <label for="q11d">Definitely disagree</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q12">12. I find it easy to make decisions, big and small</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q12a" name="q12" value="a" >
+                        <label for="q12a">Definitely agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q12b" name="q12" value="b">
+                        <label for="q12b">Slightly agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q12c" name="q12" value="c">
+                        <label for="q12c">Slightly disagree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q12d" name="q12" value="d">
+                        <label for="q12d">Definitely disagree</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q13">13. I think I am unattractive or ugly</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q13a" name="q13" value="a" >
+                        <label for="q13a">Definitely agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q13b" name="q13" value="b">
+                        <label for="q13b">Slightly agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q13c" name="q13" value="c">
+                        <label for="q13c">Slightly disagree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q13d" name="q13" value="d">
+                        <label for="q13d">Definitely disagree</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q14">14. I find it really hard to do anything, especially work</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q14a" name="q14" value="a" >
+                        <label for="q14a">Definitely agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q14b" name="q14" value="b">
+                        <label for="q14b">Slightly agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q14c" name="q14" value="c">
+                        <label for="q14c">Slightly disagree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q14d" name="q14" value="d">
+                        <label for="q14d">Definitely disagree</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q15">15. My sleep patterns have been really disrupted</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q15a" name="q15" value="a" >
+                        <label for="q15a">Definitely agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q15b" name="q15" value="b">
+                        <label for="q15b">Slightly agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q15c" name="q15" value="c">
+                        <label for="q15c">Slightly disagree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q15d" name="q15" value="d">
+                        <label for="q15d">Definitely disagree</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q16">16. I am so tired I don’t have the energy to do anything</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q16a" name="q16" value="a" >
+                        <label for="q16a">Definitely agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q16b" name="q16" value="b">
+                        <label for="q16b">Slightly agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q16c" name="q16" value="c">
+                        <label for="q16c">Slightly disagree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q16d" name="q16" value="d">
+                        <label for="q16d">Definitely disagree</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q17">17. My appetite has changed a lot</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q17a" name="q17" value="a" >
+                        <label for="q17a">Definitely agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q17b" name="q17" value="b">
+                        <label for="q17b">Slightly agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q17c" name="q17" value="c">
+                        <label for="q17c">Slightly disagree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q17d" name="q17" value="d">
+                        <label for="q17d">Definitely disagree</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q18">18. I have lost a lot of weight</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q18a" name="q18" value="a" >
+                        <label for="q18a">Definitely agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q18b" name="q18" value="b">
+                        <label for="q18b">Slightly agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q18c" name="q18" value="c">
+                        <label for="q18c">Slightly disagree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q18d" name="q18" value="d">
+                        <label for="q18d">Definitely disagree</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q19">19.I am very concerned, even preoccupied, with my physical health</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q19a" name="q19" value="a" >
+                        <label for="q19a">Definitely agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q19b" name="q19" value="b">
+                        <label for="q19b">Slightly agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q19c" name="q19" value="c">
+                        <label for="q19c">Slightly disagree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q19d" name="q19" value="d">
+                        <label for="q19d">Definitely disagree</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q20">20. I am not interested in sexual relations at all</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q20a" name="q20" value="a" >
+                        <label for="q20a">Definitely agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q20b" name="q20" value="b">
+                        <label for="q20b">Slightly agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q20c" name="q20" value="c">
+                        <label for="q20c">Slightly disagree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q20d" name="q20" value="d">
+                        <label for="q20d">Definitely disagree</label>
+                    </div>
+                </div>
+            </div>
+            <div class="question">
+                <label for="q21">21. I have thought about ending my life</label>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q21a" name="q21" value="a" >
+                        <label for="q21a">Definitely agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q21b" name="q21" value="b">
+                        <label for="q21b">Slightly agree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q21c" name="q21" value="c">
+                        <label for="q21c">Slightly disagree</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q21d" name="q21" value="d">
+                        <label for="q21d">Definitely disagree</label>
+                    </div>
+                </div>
+            </div>
+            <div class=form-group><button type="submit">Submit</button></div>
+        </form>
+        <div id="result" class="result"></div>
+        <div id="doctors" class="doctors" style="display: none;">
+            <h2>Recommended Doctors</h2>
+            <div class="doctor-item">
+                <p><strong>Dr. Usha Sathish</strong></p>
+                <p>Phone: 911141193943</p>
+                <p><a href="https://maps.app.goo.gl/A9e8uiPSPpTA16Tz9" target="_blank">Location</a></p>
+                <p>Experience: 1+ years</p>
+            </div>
+            <div class="doctor-item">
+                <p><strong>Dr Venkatesh Babu G M</strong></p>
+                <p>Phone: 918071910148</p>
+                <p><a href="https://maps.app.goo.gl/EB36Wz5uZsm8FWMXA" target="_blank">Location</a></p>
+                <p>Experience: 18 years</p>
+            </div>
+            <div class="doctor-item">
+                <p><strong>Dr. Anunka Mondal</strong></p>
+                <p>Phone: 918045685300</p>
+                <p><a href="https://maps.app.goo.gl/EB36Wz5uZsm8FWMXA" target="_blank">Location</a></p>
+                <p>Experience: 5 years</p>
+            </div>
+            <div class="doctor-item">
+                <p><strong>Dr Ravi Prakash</strong></p>
+                <p>Phone: 08071909298</p>
+                <p><a href="https://maps.app.goo.gl/QgeccTmRxFzzikFp9" target="_blank">Location</a></p>
+                <p>Experience: 20 years</p>
+            </div>
+        </div>
+        <div id="thankyou" class="thankyou" style="display: none;">
+            <h2>Thank You!</h2>
+            <p>Your responses have been recorded.</p>
+        </div>
+    </div>
+
+            <script>
+                const scoring = {
+                    'a': 3,
+                    'b': 2,
+                    'c': 1,
+                    'd': 0
+                };
+            
+                document.getElementById('questionnaire-form').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    let totalScore = 0;
+                    let allAnswered = true;
+            
+                    // Check if all questions are answered and calculate the score
+                    for (let i = 1; i <= 21; i++) {
+                        const options = document.getElementsByName('q' + i);
+                        let answered = false;
+                        for (let option of options) {
+                            if (option.checked) {
+                                totalScore += scoring[option.value];
+                                answered = true;
+                                break;
+                            }
+                        }
+                        if (!answered) {
+                            allAnswered = false;
+                            alert('Please answer all questions before submitting.');
+                            break;
+                        }
+                    }
+            
+                    if (!allAnswered) return;
+            
+                    // Determine depression level based on totalScore
+                    let depressionLevel = "";
+                    if (totalScore >= 0 && totalScore <= 10) {
+                        depressionLevel = "Little/None";
+                    } else if (totalScore >= 11 && totalScore <= 16) {
+                        depressionLevel = "Mild";
+                    } else if (totalScore >= 17 && totalScore <= 20) {
+                        depressionLevel = "Moderate";
+                    } else if (totalScore >= 21 && totalScore <= 30) {
+                        depressionLevel = "High";
+                    } else if (totalScore >= 31 && totalScore <= 63) {
+                        depressionLevel = "High to Severe";
+                    }
+            
+                    // Display the result
+                    document.getElementById('result').textContent = `Your depression level is: ${depressionLevel}. Your total score is: ${totalScore}`;
+            
+                    // Show doctor recommendation if needed
+                    if (depressionLevel !== "Little/None") {
+                        document.getElementById('doctors').style.display = 'block';
+                    } else {
+                        document.getElementById('doctors').style.display = 'none';
+                    }
+            
+                    document.getElementById('thankyou').style.display = 'block';
+                });
+            </script>
+</body>
+</html>

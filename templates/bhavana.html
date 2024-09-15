@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Recognition and Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bhavana.css') }}">
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="BHAVANA Bot" class="logo">
+        </div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li>
+                    <a href="/about">About</a>
+                    <ul>
+                        <li><a href="#mission">Our Mission</a></li>
+                        <li><a href="#team">Our Team</a></li>
+                        <li><a href="#feedback">Feedback</a></li>
+                    </ul>
+                </li>
+                <li><a href="/bhavana">Try Bhavana</a></li>
+                <li><a href="/self_assessment">Self Assessment</a></li>
+                <li><a href="/feedback">Articles/Feedback</a></li>
+                {% if 'username' in session %}
+                    <li><a class="login-button" href="/logout">Logout</a></li>
+                {% else %}
+                    <li><a class="login-button" href="/login_signup">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>   
+    </header>
+
+    <div class="container">
+        <!-- Background Video -->
+        <video autoplay muted loop id="background-video">
+            <source src="{{ url_for('static', filename='images/Dark Background Web.mp4') }}" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+
+        <!-- Sidebar -->
+        <div class="slidebar" id="sidebar">
+            <button id="toggle-sidebar" onclick="toggleSidebar()">☰</button>
+            <h2>Chat History:</h2>
+            <div id="history-sidebar">
+                <!-- Chat history list will be inserted here -->
+            </div>
+        </div>
+
+        <!-- Webcam Feed -->
+        <div class="webcam-feed">
+            <h2 style="color: white; text-align: center;">Webcam Feed</h2>
+            <img id="webcam" src="{{ url_for('video_feed') }}" width="640" height="480">
+            <button id="capture-button" onclick="captureEmotion()">Capture Emotion</button>
+            <button id="new-chat-button" onclick="startNewChat()">New Chat</button>
+        </div>
+
+        <!-- Chat Box -->
+        <div class="chat-box">
+            <h2 style="color: white; text-align: center;">Chat with Bhavana</h2>
+            <div id="chat-response">
+                <!-- Initial message will be inserted here after emotion is captured -->
+            </div>
+            <form id="chat-form">
+                <input type="text" id="user_input" placeholder="Type your message here...">
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        const userName = 'Sukruth';
+        let detectedEmotion = 'neutral';  // This will be updated after capturing the emotion
+        let chatId = null;  // This will be updated after the first chat interaction
+
+        // Capture emotion and start the chat
+        function captureEmotion() {
+        document.getElementById('capture-button').disabled = true;
+
+        fetch('/capture_emotion', {
+            method: 'POST',
+        })
+        .then(response => response.json())
+        .then(data => {
+            detectedEmotion = data.captured_emotion;
+            alert(`Emotion detected: ${detectedEmotion}`); // Send an alert with the detected emotion
+            freezeCamera();  // Freeze the camera feed by showing the captured frame
+            startChatWithEmotion();  // Start chat with the captured emotion
+        });
+    }
+
+        // Start the initial chat with detected emotion
+        function startChatWithEmotion() {
+        const userInput = '';  // Initial chat does not have user input
+
+        fetch('/chatbot_response', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                user_name: userName,
+                detected_emotion: detectedEmotion,
+                user_input: userInput,
+                chat_id: chatId
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            chatId = data.chat_id;  // Update the chat ID
+            displayMessage(data.response, 'bhavana');  // Display Bhavana's response
+        });
+    }
+        // Freeze the camera feed by showing the captured frame
+        function freezeCamera() {
+        const webcam = document.getElementById('webcam');
+        webcam.src = '/frozen_frame';  // Load the captured frame
+    }
+
+        // Reactivate the camera feed
+        function startCamera() {
+        const webcam = document.getElementById('webcam');
+        webcam.src = "{{ url_for('video_feed') }}";  // Restart the video feed
+    }
+
+        // Start a new chat and reactivate the camera
+        function startNewChat() {
+        document.getElementById('capture-button').disabled = false;
+
+        fetch('/new_chat', {
+            method: 'POST',
+        })
+        .then(response => response.json())
+        .then(() => {
+            chatId = null;  // Reset chat ID for a new conversation
+            document.getElementById('chat-response').innerHTML = '';  // Clear the chat box
+            startCamera();  // Reactivate the camera feed
+        });
+    }
+
+       // Send user message and get chatbot response
+    document.getElementById('chat-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const userInput = document.getElementById('user_input').value.trim();
+        if (userInput === '') return;
+
+        displayMessage(userInput, 'user');  // Display user's message
+        document.getElementById('user_input').value = '';  // Clear the input field
+
+        // Send the user's message to the server
+        fetch('/chatbot_response', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                user_name: userName,
+                detected_emotion: detectedEmotion,
+                user_input: userInput,
+                chat_id: chatId
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            chatId = data.chat_id;  // Update the chat ID
+            displayMessage(data.response, 'bhavana');  // Display Bhavana's response
+        });
+    });
+
+        // Display a message in the chatbox
+         // Display a message in the chatbox
+    function displayMessage(message, sender = 'user') {
+        const chatResponse = document.getElementById('chat-response');
+        const messageElement = document.createElement('div');
+        messageElement.className = sender === 'bhavana' ? 'bhavana-message' : 'user-message';
+
+        if (sender === 'bhavana') {
+            messageElement.innerHTML = `<img src="{{ url_for('static', filename='images/logo.png') }}" class="bhavana-logo"> <p>${message}</p>`;
+        } else {
+            messageElement.innerHTML = `<p>${message}</p>`;
+        }
+
+        chatResponse.appendChild(messageElement);
+        chatResponse.scrollTop = chatResponse.scrollHeight;  // Auto-scroll to the bottom
+    }
+
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('active');
+    }
+
+        // Load chat history
+        fetch('/chat_history', {
+            method: 'GET',
+        })
+        .then(response => response.json())
+        .then(data => {
+            const historySidebar = document.getElementById('history-sidebar');
+            historySidebar.innerHTML = '';  // Clear previous history
+
+            data.forEach(chat => {
+                const chatItem = document.createElement('div');
+                chatItem.className = 'chat-item';
+                const title = `${chat._id.time_class} - ${chat._id.emotion}`;  // Use the captured emotion in the title
+                chatItem.innerHTML = `<p><strong>${title}</strong></p>`;
+                chatItem.addEventListener('click', () => loadChat(chat._id.chat_id));
+                historySidebar.appendChild(chatItem);
+            });
+        });
+
+        // Load a previous chat by its ID
+        function loadChat(chatId) {
+            fetch(`/load_chat/${chatId}`, {
+                method: 'GET',
+            })
+            .then(response => response.json())
+            .then(data => {
+                const chatResponse = document.getElementById('chat-response');
+                chatResponse.innerHTML = '';  // Clear the chat box
+
+                data.chat_history.forEach(chat => {
+                    displayMessage(chat.user_input, 'user');
+                    displayMessage(chat.response, 'bhavana');
+                });
+
+                chatId = data.chat_id;  // Update the current chat ID
+            });
+        }
+    </script>
+</body>
+</html>
