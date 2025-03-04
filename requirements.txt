@@ -1,5 +1,9 @@
-Flask==2.3.2
-opencv-python==4.8.0.74
-fer==22.4.0
-google-generativeai==1.1.0
-numpy==1.23.5
+Flask
+werkzeug
+smtplib
+email
+opencv-python
+fer
+google-generativeai
+pymongo
+bson
