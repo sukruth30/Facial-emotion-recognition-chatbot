@@ -203,50 +203,57 @@ def capture_emotion():
 
 @app.route('/chatbot_response', methods=['POST'])
 def chatbot_response():
-    data = request.json
-    user_name = session.get('username', 'User')  # Use session username
-    detected_emotion = data.get('detected_emotion', 'neutral')
-    user_input = data.get('user_input', '').lower()
-    chat_id = data.get('chat_id')
+    try:
+        data = request.json
+        user_name = session.get('username', 'User')  # Use session username
+        detected_emotion = data.get('detected_emotion', 'neutral')
+        user_input = data.get('user_input', '').lower()
+        chat_id = data.get('chat_id')
 
-    if user_input == '':
-        prompt = f"Generate a friendly and super excited message from a chatbot named Bhavana. The user is named {user_name} and is feeling {detected_emotion}. Please engage the user warmly."
-    else:
-        prompt = (f"Generate an enthusiastic and excited response from a chatbot named Bhavana based on the user's emotion, which is {detected_emotion}. "
-                  f"The user has said: '{user_input}'. The response should be lively, conversational, and tailored to the user's current emotional state.")
+        # Check that the emotion and input are coming through correctly
+        print(f"User: {user_name}, Emotion: {detected_emotion}, Input: {user_input}, Chat ID: {chat_id}")
 
-    response = model.generate_content(prompt)
-    response_text = response.text.strip()
+        if user_input == '':
+            prompt = f"Generate a friendly and super excited message from a chatbot named Bhavana. The user is named {user_name} and is feeling {detected_emotion}. Please engage the user warmly."
+        else:
+            prompt = (f"Generate an enthusiastic and excited response from a chatbot named Bhavana based on the user's emotion, which is {detected_emotion}. "
+                      f"The user has said: '{user_input}'. The response should be lively, conversational, and tailored to the user's current emotional state.")
 
-    # Update chat history in MongoDB
-    timestamp = datetime.now()
+        response = model.generate_content(prompt)
+        response_text = response.text.strip()
 
-    if chat_id:
-        collection.update_one(
-            {'_id': ObjectId(chat_id)},
-            {'$push': {'chat_history': {
-                'timestamp': timestamp,
-                'user_input': user_input,
-                'response': response_text
-            }}}
-        )
-    else:
-        chat_entry = {
-            'timestamp': timestamp,
-            'user_name': user_name,
-            'detected_emotion': detected_emotion,
-            'chat_history': [
-                {
+        # Update chat history in MongoDB
+        timestamp = datetime.now()
+
+        if chat_id:
+            collection.update_one(
+                {'_id': ObjectId(chat_id)},
+                {'$push': {'chat_history': {
                     'timestamp': timestamp,
                     'user_input': user_input,
                     'response': response_text
-                }
-            ]
-        }
-        result = collection.insert_one(chat_entry)
-        chat_id = str(result.inserted_id)
+                }}}
+            )
+        else:
+            chat_entry = {
+                'timestamp': timestamp,
+                'user_name': user_name,
+                'detected_emotion': detected_emotion,
+                'chat_history': [
+                    {
+                        'timestamp': timestamp,
+                        'user_input': user_input,
+                        'response': response_text
+                    }
+                ]
+            }
+            result = collection.insert_one(chat_entry)
+            chat_id = str(result.inserted_id)
 
-    return jsonify({"response": response_text, "chat_id": chat_id})
+        return jsonify({"response": response_text, "chat_id": chat_id})
+
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
 
 @app.route('/new_chat', methods=['POST'])
 def new_chat():

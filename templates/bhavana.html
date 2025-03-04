@@ -92,28 +92,38 @@
         });
     }
 
-        // Start the initial chat with detected emotion
-        function startChatWithEmotion() {
-        const userInput = '';  // Initial chat does not have user input
+    function startChatWithEmotion() {
+    const userInput = '';  // Initial chat does not have user input
 
-        fetch('/chatbot_response', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                user_name: userName,
-                detected_emotion: detectedEmotion,
-                user_input: userInput,
-                chat_id: chatId
-            }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            chatId = data.chat_id;  // Update the chat ID
-            displayMessage(data.response, 'bhavana');  // Display Bhavana's response
-        });
-    }
+    console.log('Starting chat with emotion:', detectedEmotion);  // Log emotion to debug
+
+    fetch('/chatbot_response', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            user_name: userName,
+            detected_emotion: detectedEmotion,
+            user_input: userInput,
+            chat_id: chatId
+        }),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Chatbot response:', data);  // Log the response from the server
+        chatId = data.chat_id;  // Update the chat ID
+        displayMessage(data.response, 'bhavana');  // Display Bhavana's response
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
+}
         // Freeze the camera feed by showing the captured frame
         function freezeCamera() {
         const webcam = document.getElementById('webcam');
