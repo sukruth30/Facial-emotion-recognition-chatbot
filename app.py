@@ -11,6 +11,10 @@ from datetime import datetime, timedelta
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 
+# Add dotenv support
+from dotenv import load_dotenv
+load_dotenv()
+
 # Configure the API key for Gemini
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
